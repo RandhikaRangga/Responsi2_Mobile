@@ -1,0 +1,130 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Data Pengeluaran</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ion-card *ngFor="let item of dataPengeluaran">
+    <ion-item>
+      <ion-label>
+        {{item.nama_transaksi}}
+        <p>{{item.jumlah}}</p>
+      </ion-label>
+      <ion-button color="danger" slot="end" (click)="hapusPengeluaran(item.id)">
+        Hapus
+      </ion-button>
+      <ion-button expand="block" (click)="open_modal_edit(true,item.id)">
+        Edit
+      </ion-button>
+    </ion-item>
+  </ion-card>
+  <ion-card>
+    <ion-button (click)="open_modal_tambah(true)" expand="block">
+      Tambah Pengeluaran
+    </ion-button>
+  </ion-card>
+
+  <!-- ini untuk modal tambah -->
+  <ion-modal [isOpen]="modal_tambah">
+    <ng-template>
+      <ion-header>
+        <ion-toolbar>
+          <ion-buttons slot="start">
+            <ion-button (click)="cancel()">Batal</ion-button>
+          </ion-buttons>
+          <ion-title>Tambah Pengeluaran</ion-title>
+        </ion-toolbar>
+      </ion-header>
+      <ion-content class="ion-padding">
+        <ion-item>
+          <ion-input
+            label="Nama Transaksi"
+            labelPlacement="floating"
+            required
+            [(ngModel)]="nama_transaksi"
+            placeholder="Masukkan Nama Transaksi"
+            type="text"
+          >
+          </ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-input
+            label="Jumlah"
+            labelPlacement="floating"
+            required
+            [(ngModel)]="jumlah"
+            placeholder="Masukkan Jumlah Pengeluaran"
+            type="text"
+          >
+          </ion-input>
+        </ion-item>
+        <ion-row>
+          <ion-col>
+            <ion-button
+              type="button"
+              (click)="tambahPengeluaran()"
+              color="primary"
+              shape="full"
+              expand="block"
+              >Tambah Pengeluaran
+            </ion-button>
+          </ion-col>
+        </ion-row>
+      </ion-content>
+    </ng-template>
+  </ion-modal>
+
+  <!-- ini untuk modal edit -->
+  <ion-modal [isOpen]="modal_edit">
+    <ng-template>
+      <ion-header>
+        <ion-toolbar>
+          <ion-buttons slot="start">
+            <ion-button (click)="cancel()">Batal</ion-button>
+          </ion-buttons>
+          <ion-title>Edit Pengeluaran</ion-title>
+        </ion-toolbar>
+      </ion-header>
+      <ion-content class="ion-padding">
+        <ion-item>
+          <ion-input
+            label="Nama Transaksi"
+            labelPlacement="floating"
+            required
+            [(ngModel)]="nama_transaksi"
+            placeholder="Masukkan Nama Transaksi"
+            type="text"
+          >
+          </ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-input
+            label="Jumlah Pengeluaran"
+            labelPlacement="floating"
+            required
+            [(ngModel)]="jumlah"
+            placeholder="Masukkan Jumlah Pengeluaran"
+            type="text"
+          >
+          </ion-input>
+        </ion-item>
+        <ion-input required [(ngModel)]="id" type="hidden"> </ion-input>
+        <ion-row>
+          <ion-col>
+            <ion-button
+              type="button"
+              (click)="editPengeluaran()"
+              color="primary"
+              shape="full"
+              expand="block"
+              >Edit Pengeluaran
+            </ion-button>
+          </ion-col>
+        </ion-row>
+      </ion-content>
+    </ng-template>
+  </ion-modal>
+</ion-content>

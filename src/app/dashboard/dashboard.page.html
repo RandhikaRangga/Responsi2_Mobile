@@ -1,0 +1,26 @@
+<ion-header [translucent]="true">
+    <ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-menu-button></ion-menu-button>
+      </ion-buttons>
+      <ion-title>Catatan Keuangan</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content>
+    <ion-card *ngFor="let item of dataPemasukan">
+      <ion-item>
+        <ion-label>
+          <b>Pemasukan</b>
+          <p>{{item.nama_transaksi}}&nbsp;=&nbsp;Rp.{{item.jumlah}}</p>
+        </ion-label>
+      </ion-item>
+    </ion-card>
+    <ion-card *ngFor="let item of dataPengeluaran">
+        <ion-item>
+          <ion-label>
+          <b>Pengeluaran</b>
+          <p>{{item.nama_transaksi}}&nbsp;=&nbsp;Rp.{{item.jumlah}}</p>
+          </ion-label>
+        </ion-item>
+      </ion-card>
+  </ion-content>

@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { ModalController } from '@ionic/angular';
 import { ApiService } from '../api.service';
-
+import { ModalController } from '@ionic/angular';
+import { Preferences } from '@capacitor/preferences';
+import { AuthenticationService } from '../services/authentication.service';
+import { AlertController } from '@ionic/angular';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-dashboard',
@@ -14,8 +17,11 @@ export class DashboardPage implements OnInit {
   id: number | null = null;
 
   constructor(
-    private _apiService: ApiService,
-    private modal: ModalController
+    public _apiService: ApiService, 
+    private modal:ModalController,
+    private authService: AuthenticationService,
+    private alertController: AlertController, 
+    private router: Router
   ) {  }
 
   ngOnInit() {
@@ -46,4 +52,27 @@ export class DashboardPage implements OnInit {
       },
     });
   }
+
+  logout(){
+    this.alertController.create({
+      header: 'Perhatian',
+      subHeader: 'Yakin Logout Aplikasi ?',
+      buttons: [{
+        text: 'Batal',
+        handler: (data: any) => {
+          console.log('Canceled',data);
+        }
+      },
+      {
+        text: 'Yakin',
+        handler: (data: any) => {
+          this.authService.logout();
+          this.router.navigateByUrl('/',{replaceUrl:true});
+        }
+      }
+      ]
+    }).then(res=> {
+      res.present();
+    })
+  }
 }

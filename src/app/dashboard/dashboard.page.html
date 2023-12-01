@@ -3,10 +3,20 @@
       <ion-buttons slot="start">
         <ion-menu-button></ion-menu-button>
       </ion-buttons>
-      <ion-title>Catatan Keuangan</ion-title>
+      <ion-title>Selamat Datang di Aplikasi Catatan Keuangan</ion-title>
+      <ion-button size="default" color="danger" slot="end" (click)="logout()">
+        <ion-icon slot="start" ios="exit-outline" md="exit-sharp"></ion-icon>
+        <ion-label>Logout</ion-label>
+      </ion-button>
     </ion-toolbar>
   </ion-header>
   <ion-content>
+    <ion-card>
+      <!-- <ion-item (click)="logout()">
+        <ion-icon slot="start" ios="exit-outline" md="exit-sharp"></ion-icon>
+        <ion-label>Logout</ion-label>
+      </ion-item> -->
+    </ion-card>
     <ion-card *ngFor="let item of dataPemasukan">
       <ion-item>
         <ion-label>
